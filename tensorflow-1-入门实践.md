@@ -121,4 +121,4 @@ curr_W, curr_b, curr_loss  = sess.run([W, b, loss], {x:x_train, y:y_train})
 print("W: %s b: %s loss: %s"%(curr_W, curr_b, curr_loss))
 ```
 Tip：TensorFlow提供了一个名为TensorBoard的实用程序，可以显示计算图的图片，帮助人们理解模型和编写程序。下图为该程序的可视化计算图：
-！[计算图可视化](MyNotebook/p-1.png)
+！[计算图可视化](https://github.com/Miracle-qi/MyNotebook/blob/master/p-1.png)
