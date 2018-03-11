@@ -1,6 +1,6 @@
 ![Tensorflow官方中文文档](http://cwiki.apachecn.org/display/TensorFlow)
 # TensorFlow学习笔记
-> 本文档是个人在学习官方文档摘录的重点整理而成，可以作为官方文档简化版阅读
+> 本文档是个人在学习官方文档摘录的重点整理而成，可以作为官方文档简化版阅读<br>
 > Copyright © Qi Shuhao. All Rights Reserved
 ## 入门实践
 首先要理解TensorFlow中的中心数据单位是张量（tensor），张量由一组成形为任意数量的数组的原始值组成，而张量的等级是其维数。下面跟着官方文档
@@ -31,7 +31,7 @@ sess = tf.Session()
 ```
 node3 = tf.add(node1, node2)
 ```
-Tip：TensorFlow提供了一个名为TensorBoard的实用程序，可以显示计算图的图片。
+
 #### 创建占位符
 可以将图形参数化为接受外部输入，称为占位符。一个占位符是一个承诺后提供一个值。
 ```
@@ -39,6 +39,7 @@ a = tf.placeholder(tf.float32)
 b = tf.placeholder(tf.float32)
 adder_node = a + b  # + provides a shortcut for tf.add(a, b)
 ```
+
 #### 创建变量
 在机器学习中，我们通常会想要一个可以接受任意输入的模型，比如上面的一个。
 为了使模型可训练，我们需要能够修改图形以获得具有相同输入的新输出。 变量允许我们向图中添加可训练的参数。它们的构造类型和初始值：
@@ -48,6 +49,7 @@ b = tf.Variable([-.3], tf.float32)
 x = tf.placeholder(tf.float32)
 linear_model = W * x + b
 ```
+
 #### 初始化变量
 常数被调用时初始化tf.constant，其值永远不会改变。相比之下，调用时，变量不会被初始化tf.Variable。
 要初始化TensorFlow程序中的所有变量，必须显式调用特殊操作，如下所示：
@@ -86,7 +88,7 @@ print(sess.run(loss, {x:[1,2,3,4], y:[0,-1,-2,-3]}))
 optimizer = tf.train.GradientDescentOptimizer(0.01)
 train = optimizer.minimize(loss)
 ```
-###完整程序
+### 完整程序
 通过上面的概念讲解，大概应该读懂完整程序，这是学习Tensorflow的第一步，我们对Tensorflow有了最初的认知。
 ```
 import numpy as np
@@ -118,4 +120,5 @@ for i in range(1000):
 curr_W, curr_b, curr_loss  = sess.run([W, b, loss], {x:x_train, y:y_train})
 print("W: %s b: %s loss: %s"%(curr_W, curr_b, curr_loss))
 ```
-！[Tensorboard可视化]( MyNotebook/p-1.png )
+Tip：TensorFlow提供了一个名为TensorBoard的实用程序，可以显示计算图的图片，帮助人们理解模型和编写程序。下图为该程序的可视化计算图：
+！[计算图可视化](MyNotebook/p-1.png)
