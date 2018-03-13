@@ -58,7 +58,7 @@ weights = tf.Variable(tf.random_normal([2,3], stddev = 2)， name="weights")
 * 全一数组 tf.ones()
 * 全为给定的某数(例如9）：tf.fill([2,3],9)
 * 产生给定值得常量 tf.cinstant([1,2,3])
-除了tf.Variable函数， TensorFlow还提供了tf.get_variable函数来创建或获取变量。它们的区别在于，对于tf.Variable 函数，变量名称是个可选的参数，通过 name = ‘v’ 给出，但对于tf.get_variable函数，变量名称是必填的选项，它会首先根据变量名试图创建一个参数，如果遇到同名的参数就会报错。[知乎-tensor变量名和name属性的区别](https://www.zhihu.com/question/61426401/answer/189905912)[TensorFlow图变量tf.Variable的用法解析]（http://blog.csdn.net/gg_18826075157/article/details/78368924）<br>
+除了tf.Variable函数， TensorFlow还提供了tf.get_variable函数来创建或获取变量。它们的区别在于，对于tf.Variable 函数，变量名称是个可选的参数，通过 name = ‘v’ 给出，但对于tf.get_variable函数，变量名称是必填的选项，它会首先根据变量名试图创建一个参数，如果遇到同名的参数就会报错。![知乎-tensor变量名和name属性的区别](https://www.zhihu.com/question/61426401/answer/189905912) & ![TensorFlow图变量tf.Variable的用法解析](http://blog.csdn.net/gg_18826075157/article/details/78368924)<br>
 #### 变量初始化
 在TensorFlow的世界里，变量的定义和初始化是分开的，所有关于图变量的赋值和计算都要通过tf.Session的run来进行。想要将所有图变量进行集体初始化时应该使用tf.global_variables_initializer。
 有时候会需要用另一个变量的初始化值给当前变量初始化。 tf.initialize_all_variables()是并行地初始化所有变量。 使用其它变量的值初始化一个新的变量时，可以直接把已初始化的值作为新变量的初始值，或者把它当做tensor计算得到一个值赋予新变量。
@@ -71,7 +71,7 @@ w_twice = tf.Variable(weights.initialized_value() * 0.2, name="w_twice")
 用同一个Saver对象来恢复变量。当从文件中恢复变量时，不需要对它们做初始化。tf.train.Saver() 默认保存和加载计算图上定义的全部变量，如果只需加载模型的部分变量，例如可以使用tf.train.Saver([v1])构建，这样只有变量 v1 会被加载进来。如果要对变量名进行修改，可通过字典将模型保存时的变量名和需要加载的变量联系起来。
 
 #### Xaiver初始化方法
-如果深度学习模型的权重初始化得太小，那信号将在每层间传递时逐渐缩小而难以产生作用；如果权重初始化得太大，那信号将在每层间传递时逐渐放大并导致发散和失效。Xaiver initialization由Xavier Glorot和Yoshua Bengio在2010年提出，Xavier让权重满足均值为0，其基本思想是使前向传播和反向传播时每一层的方差一致。[Xavier Initialization 的理解与推导（及实现）]（http://blog.csdn.net/lanchunhui/article/details/70318941）
+如果深度学习模型的权重初始化得太小，那信号将在每层间传递时逐渐缩小而难以产生作用；如果权重初始化得太大，那信号将在每层间传递时逐渐放大并导致发散和失效。Xaiver initialization由Xavier Glorot和Yoshua Bengio在2010年提出，Xavier让权重满足均值为0，其基本思想是使前向传播和反向传播时每一层的方差一致。![Xavier Initialization 的理解与推导（及实现）](http://blog.csdn.net/lanchunhui/article/details/70318941)
 
 ### Fetch & Feed
 为了取回操作的输出内容, 可以在使用 Session 对象的 run() 调用执行图时, 传入一些 tensor, 来取回结果。当获取的多个 tensor 值时，是在 op 的一次运行中一起获得而不是逐个去获取的。<br>
@@ -101,7 +101,30 @@ print sess.run([output], feed_dict={input1:[7.], input2:[2.]})
 * 生成会话并且在训练数据上反复运行反向传播优化算法。
 #### 激活函数
 线性模型的最大特点是任意线性模型的组合仍然是线性模型，只通过线性变换，任意层的全连接神经网络和单层神经网络没有任何区别，因此非线性是深度学习的重要特性。目前TensorFlow提供了7种不同的非线性激活函数，常见的有：tf.nn.relu 、tf. sigmoid和tf.tanh。当遇到多分类问题时，我们可以使用softmax函数。当类别数k = 2时，softmax回归退化为logistic回归。这表明 softmax 回归是logistic回归的一般形式。当所分的类别互斥时，更适于选择 softmax回归分类器，当不互斥时，建立多个独立的logistic回归分类器更加合适。
+#### 代价函数
+神经网络模型的效果和优化的目标是通过代价函数（lost function）， 也称损失函数来定义的。训练神经网络通过反向传播代价，以减少代价为导向，调整参数。参数主要有：神经元之间的连接权重w，以及每个神经元的偏置b。调参的方式是采用梯度下降算法（ Gradient descent），沿着梯度方向调整参数大小。训练神经网络通过反向传播代价，以减少代价为导向，调整参数。参数主要有：神经元之间的连接权重w，以及每个神经元的偏置b。调参的方式是采用梯度下降算法（Gradient descent），沿着梯度方向调整参数大小。<br>
+sigmoid函数（还有tanh）有很多优点，非常适合用来做激活函数, 要解决这个问题，就可以更改代价函数，使用交叉熵（cross entropy）代价函数。交叉熵代价函数同样有两个性质：
+* 非负性，所以我们的目标就是最小化代价函数；
+* 当真实输出a与期望输出y接近的时候，代价函数接近于0；
+这样，当误差大的时候，权重更新就快，当误差小的时候，权重的更新就慢。这是很好的性质。因为交叉熵一般会与 softmax 函数一起使用， 所以TensorFlow 对这两个功能进行了 统一封装，并提供了tf.nn.softmax_cross_ebtropy_with_logits函数。TensorFlow 不仅支持经典的代价函数，还可以优化任意的自定义代价函数。
+#### 梯度下降
+神经网络的优化算法可以分为两个阶段，第一阶段先通过前向传播算法计算得到预测值，并将预测值和真实值做对比，得出两者之间的差距。然后在第二阶段通过反向传播算法计算损失函数对每一个参数的梯度，再根据梯度和学习率使用 梯度下降算法 更新每一个参数。<br>
+只有当代价函数为凸函数时，梯度下降算法才能保证被优化的函数达到全局最优解。除此之外，梯度下降算法另一个问题就是计算时间过长，根据统计，如果一个操作需要 n次 浮点运算，那么计算这个梯度则需要三倍计算量。在海量训练数据下，要计算所有训练数据的损失函数是非常耗时间的，为了加速训练过程，可以使用随机梯度下降算法（Stochastic Gradient Descent, SGD） , 它优化的并不是在全部训练数据上的损失函数，而是在每一轮迭代中，随机优化某一条训练数据上的损失函数。这样每一轮参数更新的速度大大加快，也不会陷入局部最优。但某一条数据上损失函数更小并不代表在全部数据上损失函数更小，因此，使用随机梯度下降优化得到的神经网络需要更多的步数，有时甚至很难达到局部最优。<br>
+为了综合梯度下降算法和随机梯度下降算法的优缺点，在实际应用中一般采取两个算法的折中，每一计算一小部分训练数据（称为一个batch）的损失函数，也称 mini-batch梯度下降，通常batch的取值为 2 到 100。在随机梯度下降中，还可以引入 冲量（ Momentum） ，将上一步的梯度方向保留一部分在下一步中，它的思想是，若当前梯度方向与上一次相同，那么，此次的速度增强，否则，应该相应减弱。 通常保留的系数在初始学习稳定之前，取0.5，之后取0.9或更大。<br>
 
+#### 学习率
+神经网络的学习率决定了参数每次更新的幅度，如果学习率过小，需要更多轮的迭代才能达到一个比较理想的优化效果，如果过大，可能导致参数在极优值的两侧来回移动。 TensorFlow提供了一种灵活的学习率设置方法—— 指数衰减法。
+```
+tf.train.exponential_decay（ learning_rate, global_step, decay_steps, decay_rate, staircase=False, name=None）
+```
+通过这个函数，可以先使用较大的学习率来快速得到一个比较优的解，然后随着迭代的继续逐步减小学习率。它实现了以下代码的功能：
+```
+decayed_learning_rate = learning_rate * decay_rate ^ (global_step / decay_steps)
+```
+其中 learning_rate 为事先设定的初始学习率， decay_rate 为衰减系数（取值0到1）， decay_steps 为衰减速度 ， global_step 为全局步数，系统会自动更新这个参数的值，从1开始，每迭代一次加1。这样随着迭代步数的增加， decayed_learning_rate 就会逐渐减小。decay_steps 通常设置为完整训练一个
+batch 所需要的迭代轮数，这样一个batch中的每个数据对模型训练有相等的作用，而每完整的训练一个batch，学习率就减小一次。
+
+#### 正则化
 
 
 
