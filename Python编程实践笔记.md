@@ -1,3 +1,4 @@
+
 # Python编程实践笔记
 ---
 > copyright@Qi Shuhao
@@ -9,3 +10,5 @@
 3. lambda称为匿名函数，和普通的函数相比，就是省去了函数名称而已，同时这样的匿名函数，又不能共享在别的地方调用。
 4. **ValueError: Masked arrays must be 1-D** 在用scatter绘制散点图时需要用.tolist()先把矩阵转换成list
 5.  在python中，普通的列表list和numpy中的数组array是不一样的，最大的不同是：一个列表中可以存放不同类型的数据，包括int、float和str，甚至布尔型；而一个数组中存放的数据类型必须全部相同，int或float。也正因为列表可以存放不同类型的数据，因此列表中每个元素的大小可以相同，也可以不同，也就不支持一次性读取一列，即使是对于标准的二维数字列表。**所以列表不支持列读取。**
+6. [nose](http://www.cnblogs.com/liaofeifight/p/5148717.html) python代码的自动测试工具
+7. [Argparse](https://www.cnblogs.com/jianboqi/archive/2013/01/10/2854726.html)命令行解析工具
