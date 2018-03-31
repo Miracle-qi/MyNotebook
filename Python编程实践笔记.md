@@ -1,4 +1,4 @@
-
+ 
 # Python编程实践笔记
 ---
 > copyright@Qi Shuhao
@@ -13,3 +13,5 @@
 6. [nose](http://www.cnblogs.com/liaofeifight/p/5148717.html) python代码的自动测试工具
 7. [Argparse](https://www.cnblogs.com/jianboqi/archive/2013/01/10/2854726.html)命令行解析工具
 8. **virtualenv**是一个创建隔绝的Python环境的工具。virtualenv创建一个包含所有必要的可执行文件的文件夹，用来使用Python工程所需的包。
+9. [Ros与Vrep平台搭建](http://www.cnblogs.com/zhuxuekui/p/5662159.html)
+10. assert 断言语句
