@@ -1,5 +1,3 @@
-
-
 # Python编程实践笔记
 ---
 > copyright@Qi Shuhao
@@ -17,3 +15,7 @@
 9. [Ros与Vrep平台搭建](http://www.cnblogs.com/zhuxuekui/p/5662159.html)
 10. assert 断言语句
 11. matplotlib.animation 实时图像
+12. 一般来说，要使用某个类的方法，需要先实例化一个对象再调用方法。而使用@staticmethod或@classmethod，就可以不需要实例化，直接类名.方法名()来调用。
+这有利于组织代码，把某些应该属于某个类的函数给放到那个类里去，同时有利于命名空间的整洁。<br>
+  既然@staticmethod和@classmethod都可以直接类名.方法名()来调用，那他们有什么区别呢从它们的使用上来看,@staticmethod不需要表示自身对象的self和自身类的cls参数，就跟使用函数一样。@classmethod也不需要self参数，但第一个参数需要是表示自身类的cls参数。
+13. 字符串强制格式化s.format()
