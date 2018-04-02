@@ -1,4 +1,5 @@
- 
+
+
 # Python编程实践笔记
 ---
 > copyright@Qi Shuhao
@@ -15,3 +16,4 @@
 8. **virtualenv**是一个创建隔绝的Python环境的工具。virtualenv创建一个包含所有必要的可执行文件的文件夹，用来使用Python工程所需的包。
 9. [Ros与Vrep平台搭建](http://www.cnblogs.com/zhuxuekui/p/5662159.html)
 10. assert 断言语句
+11. matplotlib.animation 实时图像
