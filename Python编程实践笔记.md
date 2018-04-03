@@ -1,3 +1,4 @@
+
 # Python编程实践笔记
 ---
 > copyright@Qi Shuhao
@@ -19,3 +20,7 @@
 这有利于组织代码，把某些应该属于某个类的函数给放到那个类里去，同时有利于命名空间的整洁。<br>
   既然@staticmethod和@classmethod都可以直接类名.方法名()来调用，那他们有什么区别呢从它们的使用上来看,@staticmethod不需要表示自身对象的self和自身类的cls参数，就跟使用函数一样。@classmethod也不需要self参数，但第一个参数需要是表示自身类的cls参数。
 13. 字符串强制格式化s.format()
+14. [os.path](http://www.cnblogs.com/dkblog/archive/2011/03/25/1995537.html)
+```
+os.walk(top, topdown=True, onerror=None, followlinks=False) # 返回(root, dirs, files)
+```
