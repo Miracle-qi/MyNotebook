@@ -24,3 +24,4 @@
 ```
 os.walk(top, topdown=True, onerror=None, followlinks=False) # 返回(root, dirs, files)
 ```
+15. [python socket编程详细介绍](https://blog.csdn.net/rebelqsp/article/details/22109925)
