@@ -1,4 +1,5 @@
 
+1.
 # Python编程实践笔记
 ---
 > copyright@Qi Shuhao
@@ -25,3 +26,5 @@
 os.walk(top, topdown=True, onerror=None, followlinks=False) # 返回(root, dirs, files)
 ```
 15. [python socket编程详细介绍](https://blog.csdn.net/rebelqsp/article/details/22109925)
+16.  xrange 不返回 List，而是返回一个 iterable 对象。
+17. 简单地讲，[**yield**](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/index.html) 的作用就是把一个函数变成一个 generator，带有 yield 的函数不再是一个普通函数，Python 解释器会将其视为一个 generator，调用 fab(5) 不会执行 fab 函数，而是返回一个 iterable 对象！
